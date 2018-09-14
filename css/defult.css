@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.token.selector {
+    color: black;
+}
+
+.token.property {
+    color: black;
+}
+
+.token.punctuation {
+    color: black;
+}
+
+#code {
+    overflow: auto;
+    height: 95vh;
+}
+#box{
+    display: flex;
+    justify-content: center;
+
+}
+
+@keyframes breath {
+    0% {
+        box-shadow: 0 0 10px rgb(255, 255, 255)
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(181, 181, 181, 0.2)
+    }
+}
