@@ -18,12 +18,12 @@
 
 #code {
     overflow: auto;
-    height: 95vh;
 }
 #box{
     display: flex;
     justify-content: center;
-
+    align-items: center;
+    height: 100vh;
 }
 
 @keyframes breath {
