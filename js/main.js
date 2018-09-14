@@ -32,7 +32,7 @@
                 window.clearInterval(clock)
                 fn.call()
             }
-        }, 50)
+        }, 10)
     }
 
     function createPaper(fn) {
@@ -53,7 +53,7 @@
                 window.clearInterval(clock)
                 fn.call()
             }
-        }, 50)
+        }, 10)
 
     }
 

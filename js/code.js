@@ -33,13 +33,22 @@ html{
 }
 /*来点动画吧*/
 #code{
-    transform: skew(0deg 2deg)
+    animation: clipMe 4s linear infinite;
+}
+#line{
+    border: 2px solid #28A79A;
+    width:1px;
+    height: 100%;
+    margin-left: -5%;
+    animation: lineHeight 8s linear infinite;
+
 }
 /*现在开始写简历吧*/
 /*首先我需要一张纸*/
 `
     var htmlCode = window.htmlCode = `
 #code{
+    display: inline-block;
     position: fixed;
     right: 0;
     width: 50%;
@@ -57,13 +66,14 @@ html{
     box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.8);
     box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.8);
     text-shadow: 0 1px 0 #F6EF97;
-    margin-top: 300px;
+    margin-top: 30%;
+    
 }
 /*掉下去了！怎么办？*/
 /*没关系，再用胶带粘住它*/
 #paper:after {
-    width: 180px;
-    height: 30px;
+    width: 25%;
+    height: 5%;
     content: " ";
     margin-left: -90px;
     border: 1px solid rgba(200, 200, 200, .8);
@@ -80,14 +90,23 @@ html{
 `
     var markdown = window.markdown = `
 # 简历
-## 姓名：不远
-## 年龄：18
-## 联系电话：1755729XXXX
-## 基技能介绍
+## 基本资料
+**姓名：不远**
+**年龄：18**
+**联系电话：1755729XXXX**
+## 技能介绍
 1 吃
 2 喝
 3 嫖
 4 赌
+## 作品介绍
+**作品一**
+**作品二**
+**作品三**
+**作品四**
+**作品五**
+**作品六**
+
 `
     var changeCode = window.changeCode = `
 /*这样看起来很不舒服？让我们把markdown转换成更易读的显示方式吧*/
