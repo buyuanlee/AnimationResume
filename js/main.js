@@ -1,9 +1,5 @@
 !function () {
-// var cssCode = window.cssCode
-// var htmlCode = window.htmlCode
-// var changeCode = window.changeCode
-// var markdown = window.markdown
-// var conclusion = window.conclusion
+    let speed = 50
 
     writeCode('', cssCode, () => {
         createPaper(() => {
@@ -32,7 +28,7 @@
                 window.clearInterval(clock)
                 fn.call()
             }
-        }, 10)
+        }, speed)
     }
 
     function createPaper(fn) {
@@ -53,13 +49,14 @@
                 window.clearInterval(clock)
                 fn.call()
             }
-        }, 10)
+        }, speed)
 
     }
 
     function convertMarkdownToHtml(fn) {
-        document.querySelector('#paper').innerHTML =
-        Prism.highlight(marked(markdown).substring(0, n), Prism.languages.markdown)
+        document.querySelector('#paper').innerHTML = marked(markdown)
         fn.call()
     }
+
+
 }.call()
