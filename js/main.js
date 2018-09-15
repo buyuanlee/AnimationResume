@@ -58,7 +58,8 @@
     }
 
     function convertMarkdownToHtml(fn) {
-        document.querySelector('#paper').innerHTML = marked(markdown)
+        document.querySelector('#paper').innerHTML =
+        Prism.highlight(marked(markdown).substring(0, n), Prism.languages.markdown)
         fn.call()
     }
 }.call()

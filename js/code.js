@@ -12,7 +12,7 @@ html{
 }
 /*让我们给它加一个边框吧*/
 #code{
-    border: 2px solid #28A79A;
+    border: 2px solid #00FF1B;
     padding: 20px;
 }
 /*代码看不清楚？来点高亮吧！*/
@@ -33,15 +33,7 @@ html{
 }
 /*来点动画吧*/
 #code{
-    animation: clipMe 4s linear infinite;
-}
-#line{
-    border: 2px solid #28A79A;
-    width:1px;
-    height: 100%;
-    margin-left: -5%;
-    animation: lineHeight 8s linear infinite;
-
+    animation: breath 4s linear infinite;
 }
 /*现在开始写简历吧*/
 /*首先我需要一张纸*/
