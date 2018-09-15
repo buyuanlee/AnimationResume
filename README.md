@@ -1,3 +1,22 @@
+
+# 自动简历
+
+## 项目介绍
+
+### 一个可以自动播放书写过程简历，主要运用原生JS和CSS3的知识点。
+
+### 用到的库：
+1. **[prism][1]**       
+2. **[marked][2]**
+
+### 相关链接
+
+1. **[预览点我][3]**
+2. **[源码点我][4]**
+   ![][a]
+
+## 设计过程
+
 ### 基本思想—动起来
 
 1. 想办法让文字逐个出现在页面中
@@ -46,44 +65,40 @@
 
 1. 将内容换成CSS
 
-   ```javascript
-   var result = `
-   body{
+    ```javascript
+       var result = `
+       body{
        background:green;
-   }
-   `
-   var n = 0
-   var clock = setInterval(()=>{
+       }
+       `
+       var n = 0
+       var clock = setInterval(()=>{
        n += 1
        document.body.innerHTML = result.substring(0,n)
       if(n>=result.length){
           window.clearInterval(clock)
       }
-   },500)
+       },500)
+    ```
    ```
 
    运行一下。黑人问号脸——我的换行没啦？？？
 
    这是因为在**HTML里面，连续出现多个看不见的字符，浏览器会认为它是一个空格**
 
-   2. 利用`<pre>`标签
+2. 利用`<pre>`标签
 
-      > **HTML <pre>** 元素表示预定义格式文本。在该元素中的文本通常按照原文件中的编排，以等宽字体的形式展现出来，文本中的空白符（比如空格和换行符）都会显示出来。
+      > HTML`<pre>`元素表示预定义格式文本。在该元素中的文本通常按照原文件中的编排，以等宽字体的形式展现出来，文本中的空白符（比如空格和换行符）都会显示出来。
 
    HTML中加入`<pre>`标签，将内容写到`<pre>`中
 
    ```html
-   <!DOCTYPE html>
-   <html>
-   <head>
-     <meta charset="utf-8">
-     <title>会动的简历</title>
-   </head>
+
+
    <body>
-   <pre id="code">
-   </pre>
+   <pre id="code"></pre>
    </body>
-   </html>
+ 
    ```
 
    ```javascript
@@ -99,10 +114,10 @@
       if(n>=result.length){
           window.clearInterval(clock)
       }
-   },500)
+   },100)
    ```
 
-   3. 应用代码
+3. 应用代码
 
       现在我们只是将代码展示了出来，但是看到效果，所以我们要将代码写入到`<style>`中
 
@@ -121,7 +136,7 @@
     </body>
     </html>
     ```
-   
+       
     ```javascript
     var result = `
     body{
@@ -161,35 +176,32 @@
    ```
 
 
-2. 代码高亮？
+1. 代码高亮？
+首先会想到这样去解决，
 
-   首先会想到这样去解决，
-
-   ```html
-   <span style="color":red;>html</span>
-   ```
+    ```html
+    <span style="color":red;>html</span>
+    ```
 
    但是在CSS中这样的语法是不允许的。
 
    - 方法一:偷梁换柱
 
-   - ```javascript
-     var n = 0
-     var clock = setInterval(()=>{
-         n += 1
-         code.innerHTML = result.substring(0,n)
-         code.innerHTML = code.innerHTML.replace('html','<span style="color:red;">html</span>')
-         myStyle.innerHTML = result.substring(0,n)
-        if(n>=result.length){
-            window.clearInterval(clock)
-        }
-     },500)
-     ```
-
+    ```javascript
+         var n = 0
+         var clock = setInterval(()=>{
+             n += 1
+             code.innerHTML = result.substring(0,n)
+             code.innerHTML = code.innerHTML.replace('html','<span style="color:red;">html</span>')
+             myStyle.innerHTML = result.substring(0,n)
+            if(n>=result.length){
+                window.clearInterval(clock)
+            }
+         },500)
+    ```
      但是，很傻，很累，好的程序员要学会偷懒
 
    - 方法二：prism.js
-
      引入prism官网的JS和CSS文件后
 
      ```javascript
@@ -206,51 +218,40 @@
      }, 50)
      ```
 
-     3. 代码高亮变化
+1. 代码高亮变化
+我们需要让代码默认是平平无奇的样子，然后再增加高亮效果。这样活增加视觉的观赏性。
+    - 设置默认样式
+    我们需要在html中引入一个默认样式的css文件，内容是对代码的默认样式设置。
 
-        我们需要让代码默认是平平无奇的样子，然后再增加高亮效果。这样活增加视觉的观赏性。
+        ```CSS
+        .token.selector{
+            color: black;
+        }
+        .token.property{
+            color: black;
+        }
+        .token.punctuation{
+            color: black;
+        }
+        ```
 
-        - 设置默认样式
+    - 设置高亮样式
 
-          我们需要在html中引入一个默认样式的css文件，内容是对代码的默认样式设置。
-
-            ```css
-            .token.selector{
-                color: black;
-            }
-            .token.property{
-                color: black;
-            }
-            .token.punctuation{
-                color: black;
-            }
-            ```
-
-        - 设置高亮样式
-
-          ```CSS
-          .token.selector{
-              color: #a6e22e;
-          }
-          .token.property{
-              color: #f92672;
-          }
-          .token.punctuation{
-              color: #f8f8f2;
-          }
-          ```
+        ```CSS
+         .token.selector{
+          color: #a6e22e;
+         }
+         .token.property{
+          color: #f92672;
+         }
+         .token.punctuation{
+          color: #f8f8f2;
+         }
+        ```
           - 注意一：上面类的名称是根据prism提供的来的，审查元素可以看到名称
 
           - 注意二：CSS文件应放在引入的prism样式的下面，以免被覆盖
 
-### 加入动画
-
-```css
-/*翻个跟头*/
-#code{
-	transform: rotate(360deg);
-}
-```
 
 ### 加入html元素
 
@@ -307,7 +308,7 @@
 
 1. 封装函数
 
-1. ```javascript
+ ```javascript
    /*把code写到#code和style标签里面*/
    function writeCode(code){
        let domCode = document.querySelector('#code')
@@ -325,7 +326,7 @@
    var result = `......`
    writeCode(cssCode)
    //调用(原result内容)
-   ```
+ ```
 
 2. 回调函数
 
@@ -386,21 +387,18 @@
    }
    ```
 
-
 2. 自动滚动代码至底部，再封装的函数内增加代码
 
-3. ```javascript
+ ```javascript
    function writeCode(prefix, code, fn) {
    //...
            domCode.scrollTop=domCode.scrollHeight
    //...        
        }, 10)
    }
-   ```
+ ```
 
    > `Element.scrollTop` 属性可以获取或设置一个元素的内容垂直滚动的像素数。
-   >
-   >
 
 3. `scrollIntoView()`方法：
 
@@ -454,7 +452,7 @@ function writeMarkdown(markdown, fn) {
 
 ### 变成markdown语法
 
-利用第三方库**[marked.js][https://marked.js.org/]**
+利用第三方库**[marked.js][2]**
 
 ```javascript
     document.querySelector('#paper').innerHTML = marked(markdown)
@@ -465,3 +463,15 @@ function writeMarkdown(markdown, fn) {
 
 
 写到这里基本就结束了，剩下的就是异步函数调用的顺序了。然后再慢慢的修改CSS样式。就可以大工完成了 
+
+[1]: https://prismjs.com/
+[2]: https://marked.js.org/
+[3]: https://buyuanwanli.github.io/AnimationResume/index.html
+[4]: https://github.com/buyuanwanli/AnimationResume
+[a]: http://91jean.oss-cn-hangzhou.aliyuncs.com/18-9-15/24224356.jpg
+
+**——远方不远**
+
+
+
+
