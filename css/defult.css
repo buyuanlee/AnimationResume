@@ -16,7 +16,7 @@
     color: black;
 }
 
-#code {
+#code,#paper {
     overflow: auto;
 }
 #box{
